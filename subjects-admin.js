@@ -14,7 +14,7 @@
  window.loadSubjects=async()=>{if(busy)return;setBusy(true);try{message('Cargando asuntos...');await load();message(`${subjects.length} asunto(s) de códigos configurados.`);}catch(e){message(e.message);}finally{setBusy(false);}};
  async function mutate(action,payload){
   setBusy(true);try{
-   message('Guardando en GitHub...');const result=await api(action,payload);
+   message('Guardando...');const result=await api(action,payload);
    if(action==='add')el('subjectsInput').value='';
    await load();
    message(result.changed?(action==='add'?`Agregados: ${result.added}. Duplicados omitidos: ${result.duplicates}. `:'Cambio guardado. ')+'Espera el despliegue de Cloudflare para usar los cambios en las consultas.':`No se modificó el archivo.${result.duplicates!==undefined?' Duplicados omitidos: '+result.duplicates+'.':''}`);
